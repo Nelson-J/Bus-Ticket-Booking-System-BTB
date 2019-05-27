@@ -18,6 +18,7 @@ public class Clean {
     public Clean(){
     }
     
+    //Clears all textboxes on a view, when called
     public void resetTextFields(JPanel panel){
         JTextField temp = null;
         
