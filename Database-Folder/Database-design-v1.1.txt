@@ -1,0 +1,43 @@
+Entities	Attributes
+
+Vehicle		
+Vehicle_No
+		
+No_of_seats
+		
+Available_seats
+
+
+
+Client		Client_ID_card_No
+		Client_Name 
+
+Trip		
+trip.ID
+
+		TOrigin
+
+		TDestination
+
+		TFare
+
+
+
+
+Ticket		Ticket_ID
+		Ticket status
+
+
+RELATIONSHIPS
+
+Involves: 	At least one vehicle is involved in a trip
+		A trip involves one or many vehicles?
+
+Books: 		None or one Client books one trip
+		A trip can be booked by none or many clients
+
+Possess:	A client possesses one ticket
+		One ticket is possessed by one client
+
+
+//Added just this line
