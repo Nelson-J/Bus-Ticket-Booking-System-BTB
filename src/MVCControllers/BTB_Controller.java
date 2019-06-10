@@ -89,7 +89,8 @@ public class BTB_Controller {
     
     //Book trip for client
     //for that we need: client ID number, trip ID number, and date of trip
-    public String bookTrip(int clientIDCardNumber, String clientFirstName, String clientLastName, String tripOrigin, String tripDestination, String tripDate) throws ParseException{
+    public String bookTrip(int clientIDCardNumber, String clientFirstName, String clientLastName, 
+                            String tripOrigin, String tripDestination, String tripDate, int numberOfSeatsBooked) throws ParseException{
         int clientId = 0, tripId = 0;
         String result = "";
         
@@ -106,7 +107,7 @@ public class BTB_Controller {
                java.util.Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(tripDate);
                java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
               //Insert these two together with the trip Date into the database
-              result = model.clientBooksTrip(clientIDCardNumber, tripId, sqlDate);
+              result = model.clientBooksTrip(clientIDCardNumber, tripId, sqlDate, numberOfSeatsBooked);
               System.out.println(Integer.toString(tripId));
            }
         }

@@ -1324,12 +1324,14 @@ public class BTB_View extends javax.swing.JFrame {
         String clientFirstName = bookingClientFirstNameTextField.getText();
         String clientLastName = bookingClientLastNameTextField.getText();
         int clientIDCardNumber = Integer.parseInt(bookingClientIDTextField.getText());
+        int numberOfSeatsBooked = Integer.parseInt(bookingClientNumberOfSeatsTextField.getText());
         String tripOrigin = bookingTripOrigin.getText();
         String tripDestination = bookingTripDestination.getText();
         String tripDate = bookingDateOfTrip.getText();
         
         try {
-            result = controller.bookTrip(clientIDCardNumber, clientFirstName, clientLastName, tripOrigin, tripDestination, tripDate);
+            result = controller.bookTrip(clientIDCardNumber, clientFirstName, clientLastName, tripOrigin, 
+                                                tripDestination, tripDate, numberOfSeatsBooked);
         } catch (ParseException ex) {
             Logger.getLogger(BTB_View.class.getName()).log(Level.SEVERE, null, ex);
         }
