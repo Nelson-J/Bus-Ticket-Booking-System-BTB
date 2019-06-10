@@ -279,25 +279,38 @@ public class BTB_Model {
     //9. Client books a seat
     //The heart of the application
        
-    public String clientBooksTrip(int clientIDCardNumber, int tripIdentityNumber, java.sql.Date tripDate){
+    public String clientBooksTrip(int clientIDCardNumber, int tripIdentityNumber, java.sql.Date tripDate, int numberOfSeatsBooked){
         
         String SQL = "INSERT INTO lnkbooks (CLIENT_ID_CARD_NO, TRIP_IDENTITY_NUMBER, DATE_TRIP_BOOKED, TRIPDATE) "
                     +"VALUES ( ?, ?, CURRENT_DATE , ?)";
-        
+        //Get the vehicle number involved and and reduce the available number of seats based on the user entered
+        //no-of-seats-to-book
+        String SQL2 = "UPDATE tblvehicle " 
+                        + "SET tblvehicle.AVAILABLE_SEATS = tblvehicle.AVAILABLE_SEATS - ? " 
+                        + "WHERE tblvehicle.VEHICLE_NUMBER = (" 
+                        +   "SELECT VEHICLE_NUMBER "
+                        +       "FROM lnkinvolves WHERE lnkinvolves.TRIP_IDENTITY_NUMBER = ?)";
         int affectedRows = 0;
+        int affectedRows2 = 0;
+        
         String result = "";
         
          try{
             Connection con = connect();
             PreparedStatement pstmt = con.prepareStatement(SQL);
+            PreparedStatement pstmt1 = con.prepareStatement(SQL2);
             
             pstmt.setInt(1, clientIDCardNumber);
             pstmt.setInt(2, tripIdentityNumber);
             pstmt.setDate(3, tripDate);
             affectedRows = pstmt.executeUpdate();
             
+            pstmt1.setInt(1, numberOfSeatsBooked);
+            pstmt1.setInt(2, tripIdentityNumber);
+            affectedRows2 = pstmt1.executeUpdate();
+
              //check the affected rows : client added succesfully
-            if(affectedRows>0){
+            if(affectedRows > 0 && affectedRows2 > 0){
                System.out.println("Trip Booked with success!!!");
                result = "Success!";
             }else{
