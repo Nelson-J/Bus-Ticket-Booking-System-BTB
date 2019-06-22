@@ -15,10 +15,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import java.sql.Time;
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -592,6 +594,11 @@ public class BTB_View extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton3.setText("Print");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jButton4.setText("Exit");
@@ -1342,6 +1349,19 @@ public class BTB_View extends javax.swing.JFrame {
     private void TripTravelDateDateChooserComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_TripTravelDateDateChooserComponentMoved
         // TODO add your handling code here:
     }//GEN-LAST:event_TripTravelDateDateChooserComponentMoved
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        //The aim here is to print bookings to a pdf, ordered by date. or a new date takes a new table
+        //with the native print from the java print API, the view is bizzare; Hence
+        //solution is to print directly from the database.
+        MessageFormat header = new MessageFormat("Page, {0, number, integer}");
+        try{
+            currentBookingsTable.print(); //simple API to print a Jtable... with some arguments
+        }catch(java.awt.print.PrinterException e){
+            System.err.format("Cannot print %s%n", e.getMessage());
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
