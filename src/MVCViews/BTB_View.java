@@ -962,12 +962,12 @@ public class BTB_View extends javax.swing.JFrame {
             }
         });
         BookingsMenu.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                BookingsMenuMenuSelected(evt);
+            }
             public void menuCanceled(javax.swing.event.MenuEvent evt) {
             }
             public void menuDeselected(javax.swing.event.MenuEvent evt) {
-            }
-            public void menuSelected(javax.swing.event.MenuEvent evt) {
-                BookingsMenuMenuSelected(evt);
             }
         });
         BookingsMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1158,8 +1158,10 @@ public class BTB_View extends javax.swing.JFrame {
         
         modelAdmin.setColumnIdentifiers(columnTitles);
         currentBookingsTable.setModel(modelAdmin);
+        
+        //cells shouldn't be editable 
+        currentBookingsTable.setEnabled(false);
        // currentBookingsTable.setAutoResizeMode(currentBookingsTable.AUTO_RESIZE_ALL_COLUMNS);
-       
        //display table values
        //a row object to hold wor values
        Object[] tablerows = new Object[7];
